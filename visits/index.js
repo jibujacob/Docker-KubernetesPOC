@@ -2,7 +2,10 @@ const express = require("express");
 const redis = require("redis");
 
 const app=express();
-const client = redis.createClient();
+const client = redis.createClient({
+    host: "redis-server",
+    port: 6379
+});
 client.set("visits",0);
 
 app.get("/", (req,res)=>{
@@ -13,4 +16,4 @@ app.get("/", (req,res)=>{
 });
 
 const port = process.env.PORT||5001
-app.listen(port,()=> console.log(`Server up and runninon on port ${port}`))
+app.listen(port,()=> console.log(`Server up and running on port ${port}`))
